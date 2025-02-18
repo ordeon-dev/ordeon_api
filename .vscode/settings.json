@@ -1,0 +1,7 @@
+{
+    "path-autocomplete.pathMappings": {
+        "/src": "${workspaceRoot}/src"
+    },
+    "path-autocomplete.useRelativePaths": true,
+    "nuxt.isNuxtApp": false
+}

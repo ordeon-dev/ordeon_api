@@ -1,0 +1,74 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       Int    @id @default(autoincrement())
+    name     String
+    email    String @unique
+    password String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    Vault Vault[]
+}
+
+model Category {
+    id   Int    @id @default(autoincrement())
+    name String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    transactions Transaction[]
+    Budget       Budget[]
+}
+
+model Vault {
+    id          Int    @id @default(autoincrement())
+    name        String
+    description String
+    userId      Int
+
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+    Transaction Transaction[]
+    Budget      Budget[]
+    User        User          @relation(fields: [userId], references: [id])
+}
+
+model Transaction {
+    id              Int      @id @default(autoincrement())
+    description     String
+    amount          Float
+    categoryId      Int
+    vaultId         Int
+    date            DateTime @default(now())
+    transactionType Boolean  @default(false)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    category Category @relation(fields: [categoryId], references: [id])
+    vault    Vault    @relation(fields: [vaultId], references: [id])
+}
+
+model Budget {
+    id         Int    @id @default(autoincrement())
+    name       String
+    amount     Float
+    vaultId    Int
+    categoryId Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    vault    Vault    @relation(fields: [vaultId], references: [id])
+    category Category @relation(fields: [categoryId], references: [id])
+}
