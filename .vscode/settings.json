@@ -1,7 +1,17 @@
 {
-    "path-autocomplete.pathMappings": {
-        "/src": "${workspaceRoot}/src"
-    },
-    "path-autocomplete.useRelativePaths": true,
-    "nuxt.isNuxtApp": false
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*notifications/": true,
+    "**/.trunk/*out/": true,
+    "**/.trunk/*plugins/": true,
+    "**/*.git": true
+  },
+  "explorerExclude.backup": {}
 }

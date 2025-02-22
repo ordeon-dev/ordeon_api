@@ -1,12 +1,11 @@
 import { Global, MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { CommandModule } from './command/command.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthController } from './auth/auth.controller';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './auth/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { NotificationGateway } from './notification/notification.gateway';
@@ -30,7 +29,6 @@ import { BudgetModule } from './budget/budget.module';
   ],
   controllers: [AppController, AuthController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: AuthGuard,

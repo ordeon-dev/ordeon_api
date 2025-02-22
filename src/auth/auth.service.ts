@@ -26,7 +26,6 @@ export class AuthService {
   ): Promise<{ access_token: string; user: Omit<User, 'password'> } | null> {
     const user = await this.userService.findUserByEmail(email);
 
-    console.log(user)
     if (!user) {
       throw new UnauthorizedException({
         message: 'Dados Incorretos..!',
@@ -59,6 +58,8 @@ export class AuthService {
     user: Omit<User, 'password'>;
     message: string;
   } | null> {
+    console.log(createUserDto);
+
     const existingUser = await this.prisma.user.findUnique({
       where: { email: createUserDto.email },
     });
@@ -85,8 +86,8 @@ export class AuthService {
       name: createUser.name,
       email: createUser.email,
     };
-    
-    const { password, ...userWithoutPassword } = createUser;	
+
+    const { password, ...userWithoutPassword } = createUser;
 
     const access_token = await this.jwtService.signAsync(payload);
 
